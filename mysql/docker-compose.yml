@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  db:
+    image: mariadb:10.3
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345
+    volumes:
+      - "./data:/var/lib/mysql"
+      - "./conf.d:/etc/mysql/conf.d"
+      - "proxy_certs:/etc/mysql/ssl"
+    network_mode: bridge
+volumes:
+  proxy_certs:
+    external: true
