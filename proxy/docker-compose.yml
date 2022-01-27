@@ -1,0 +1,35 @@
+version: "2"
+
+services:
+  reverse-proxy:
+    image: "nginxproxy/nginx-proxy"
+    container_name: "nginx-proxy"
+    volumes:
+      - "certs:/etc/nginx/certs"
+      - "vhost:/etc/nginx/vhost.d"
+      - "html:/usr/share/nginx/html"
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+    restart: "always"
+    ports:
+      - "80:80"
+      - "443:443"
+    network_mode: bridge
+
+  acme-companion:
+    image: "nginxproxy/acme-companion"
+    container_name: "nginx-proxy-acme"
+    volumes_from:
+      - reverse-proxy
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "acme:/etc/acme.sh"
+    environment:
+      DEFAULT_EMAIL: "erik.ozuna@kangoru.mx"
+    restart: "always"
+    network_mode: bridge
+
+volumes:
+  certs:
+  vhost:
+  html:
+  acme:
