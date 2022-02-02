@@ -1,0 +1,18 @@
+version: '3.3'
+
+services:
+  api:
+    build: .
+    volumes:
+      - '.:/app'
+      - '/app/vendor'
+      - './kernel/Infrastructure/mysql/var/lib/mysql:/var/lib/mysql'
+      - './kernel/Infrastructure/mysql/etc/mysql/conf.d:/etc/mysql/conf.d'
+    restart: "always"
+    ports:
+    - "8000:8000"
+    environment:
+      - VIRTUAL_HOST=backoffice-api-s2.ducker.monster
+      - LETSENCRYPT_HOST=backoffice-api-s2.ducker.monster
+      - VIRTUAL_PORT=8000
+    network_mode: bridge
