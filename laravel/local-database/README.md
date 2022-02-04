@@ -15,6 +15,7 @@ $ echo kernel/Infrastructure/mysql/var/lib/mysql>>.gitignore
 change permission on storage laravel
 ```sh
 $ chmod -R 777 storage
+$ chmod -R 777 bootstrap/cache
 ```
 ### Edit you .env database
 ```sh
