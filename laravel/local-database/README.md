@@ -1,4 +1,4 @@
-### Installation on you app [cd ..]
+### Installation on you Laravel app [cd ..]
 
 ```sh
 $ curl -LO https://raw.githubusercontent.com/0zuna/Docker/main/laravel/local-database/.dockerignore
