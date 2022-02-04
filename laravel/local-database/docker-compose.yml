@@ -12,10 +12,12 @@ services:
     ports:
     - "8000:8000"
     environment:
-      - VIRTUAL_HOST=backoffice-api-s2.ducker.monster
-      - LETSENCRYPT_HOST=backoffice-api-s2.ducker.monster
-      - VIRTUAL_PORT=8000
+        # host only for reverse proxy run:
+        # https://github.com/0zuna/Docker/blob/main/proxy/docker-compose.yml
+        # - VIRTUAL_HOST=host.example.com
+        # - LETSENCRYPT_HOST=host.example.com
+        # - VIRTUAL_PORT=8000
       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
-      - MARIADB_DATABASE=inventario-api
+      - MARIADB_DATABASE=app-api
       - LARAVEL_SEEDING=no #'yes' only first time and not found /kernel/Infrastructure/mysql
     network_mode: bridge
