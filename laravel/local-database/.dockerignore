@@ -5,3 +5,4 @@ vendor
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+composer.lock
