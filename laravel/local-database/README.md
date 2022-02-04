@@ -16,3 +16,7 @@ change permission on storage laravel
 ```sh
 $ chmod -R 777 storage
 ```
+### Init
+```sh
+$ docker-compose up
+```
