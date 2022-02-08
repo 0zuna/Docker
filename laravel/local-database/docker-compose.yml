@@ -19,6 +19,6 @@ services:
         # - VIRTUAL_PORT=8000
       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
       - MARIADB_DATABASE=app-api
-      - LARAVEL_PORT_NUMBER=8000
+      - LARAVEL_PORT_NUMBER=8000 #port running
       - LARAVEL_SEEDING=no #'yes' only first time and not found /kernel/Infrastructure/mysql
     network_mode: bridge
