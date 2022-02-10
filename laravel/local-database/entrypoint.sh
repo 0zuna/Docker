@@ -3,8 +3,6 @@
 set -eo pipefail
 shopt -s nullglob
 
-chmod -R 777 /var/lib/mysql
-
 # logging functions
 mysql_log() {
 	local type="$1"; shift
@@ -324,6 +322,7 @@ docker_setup_db() {
 			docker_process_sql --database=mysql <<<"GRANT ALL ON \`${MARIADB_DATABASE//_/\\_}\`.* TO '$MARIADB_USER'@'%' ;"
 		fi
 	fi
+	chmod -R 777 "$DATADIR"
 }
 
 # backup the mysql database
