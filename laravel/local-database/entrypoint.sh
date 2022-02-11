@@ -234,28 +234,35 @@ docker_sql_escape_string_literal() {
 }
 
 _laravel_config() {
-		# sleep for mysql service
-		sleep .5
-		#
-		# LARAVEL CONFIG
-		#
+                # sleep for mysql service
+                sleep .5
+                #
+                # LARAVEL CONFIG
+                #
 
-		# Storage permission
-		#echo "[Laravel] Estableciendo permisos a /app/storage"
-		#chmod -R 777 /app/storage &
-		# Laravel Migrations
-		echo "[Laravel] Ejecuntando migrate"
-		php /app/artisan migrate
-		# Laravel Sedding
-		echo "[Laravel] Comprobando environment LARAVEL_SEEDING"
-		echo "[Laravel] Environment $LARAVEL_SEEDING"
-		if [ "$LARAVEL_SEEDING" == 'yes' ]; then
-			echo "[Laravel] Ejecuntando Seeding"
-			php /app/artisan db:seed
-			# Laravel Passport
-			echo "[Laravel] Ejecuntando passport install"
-			php /app/artisan passport:install --force
-		fi
+                # Storage permission
+                #echo "[Laravel] Estableciendo permisos a /app/storage"
+                exec gosu root chmod -R 777 /app/storage &
+
+                # verify if migrations exist only accept - char in database names
+                #more info https://dev.mysql.com/doc/refman/5.7/en/identifier-mapping.html
+                echo "[Laravel] verificado migrations en $MARIADB_DATABASE"
+                if [ ! -f "$DATADIR/${MARIADB_DATABASE//"-"/"@002d"}/migrations.frm" ]; then
+                        # Laravel Migrations
+                        echo "[Laravel] Ejecuntando migrate"
+                        php /app/artisan migrate
+                        # Laravel Sedding
+                        echo "[Laravel] Ejecuntando Seeding"
+                        php /app/artisan db:seed
+                        # Laravel Passport
+                        echo "[Laravel] Ejecuntando passport install"
+                        php /app/artisan passport:install --force
+
+                        else
+                        echo "[Laravel] Migration exists"
+                        echo "[Laravel] Skip"
+
+                fi
 }
 
 # Initializes database with timezone info and root password, plus optional extra db/user
