@@ -84,8 +84,6 @@ ARG GPG_KEYS=177F4010FE56CA3336300305F1656F24C74CD1D8
 # sub   rsa4096 2016-03-30 [E]
 
 RUN set -ex; \
-	apt update; \
-	apt update -y && apt upgrade -y; \
 	export GNUPGHOME="$(mktemp -d)"; \
 	for key in $GPG_KEYS; do \
 		gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key"; \
