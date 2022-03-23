@@ -6,8 +6,8 @@ services:
     volumes:
       - '.:/app'
       - '/app/vendor'
-      - './kernel/Infrastructure/mysql/var/lib/mysql:/var/lib/mysql'
-      - './kernel/Infrastructure/mysql/etc/mysql/conf.d:/etc/mysql/conf.d'
+      - './kernel/system/mysql/var/lib/mysql:/var/lib/mysql'
+      - './kernel/system/mysql/etc/mysql/conf.d:/etc/mysql/conf.d'
     restart: "always"
     ports:
     - "8000:8000"
