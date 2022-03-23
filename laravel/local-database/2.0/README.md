@@ -10,7 +10,7 @@ $ curl -LO https://raw.githubusercontent.com/0zuna/Docker/main/laravel/local-dat
 ### Config
 add kernel/Infrastructure/mysql/var/lib/mysql on you .gitignore
 ```sh
-$ echo kernel/Infrastructure/mysql/var/lib/mysql>>.gitignore
+$ echo kernel/system/mysql/var/lib/mysql>>.gitignore
 ```
 change permission on storage laravel
 ```sh
