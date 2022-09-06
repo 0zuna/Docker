@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+  api:
+    build: .
+    volumes:
+      - '.:/app'
+      - '/app/vendor'
+      - './kernel/system/mysql/var/lib/mysql:/var/lib/mysql'
+      - './kernel/system/mysql/etc/mysql/conf.d:/etc/mysql/conf.d'
+    restart: "always"
+    ports:
+    - "8000:80"
+    environment:
+      # host only for reverse proxy run:
+      # https://github.com/0zuna/Docker/blob/main/proxy/docker-compose.yml
+      # - VIRTUAL_HOST=host.example.com
+      # - LETSENCRYPT_HOST=host.example.com
+      # - VIRTUAL_PORT=80
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
+      - MARIADB_DATABASE=app-api
+    networks:
+      network1:
+        ipv4_address: 172.1.0.10
+
+networks:
+  network1:
+    external: true
