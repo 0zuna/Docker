@@ -1,10 +1,10 @@
 ### Installation on you Laravel app [cd ..]
 
 ```sh
-$ curl -LO https://raw.githubusercontent.com/0zuna/Docker/main/laravel/local-database/2.0/.dockerignore \
-  -LO https://raw.githubusercontent.com/0zuna/Docker/main/laravel/local-database/2.0/Dockerfile \
-  -LO https://raw.githubusercontent.com/0zuna/Docker/main/laravel/local-database/2.0/docker-compose.yml \
-  -LO https://raw.githubusercontent.com/0zuna/Docker/main/laravel/local-database/2.0/entrypoint.sh
+$ curl -LO https://raw.githubusercontent.com/0zuna/Docker/main/laravel/local-database/3.0/.dockerignore \
+  -LO https://raw.githubusercontent.com/0zuna/Docker/main/laravel/local-database/3.0/Dockerfile \
+  -LO https://raw.githubusercontent.com/0zuna/Docker/main/laravel/local-database/3.0/docker-compose.yml \
+  -LO https://raw.githubusercontent.com/0zuna/Docker/main/laravel/local-database/3.0/entrypoint.sh
 ```
 
 ### Config
