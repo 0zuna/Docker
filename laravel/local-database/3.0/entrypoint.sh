@@ -120,7 +120,7 @@ mysql_get_config() {
 
 # Do a temporary startup of the MariaDB server, for init purposes
 docker_temp_server_start() {
-	"$@" --skip-networking --default-time-zone=SYSTEM --socket="${SOCKET}" --wsrep_on=OFF --skip-log-bin \
+	"$@" --user=root --skip-networking --default-time-zone=SYSTEM --socket="${SOCKET}" --wsrep_on=OFF --skip-log-bin \
 		--loose-innodb_buffer_pool_load_at_startup=0 &
 	mysql_note "Waiting for server startup"
 	# only use the root password if the database has already been initializaed
