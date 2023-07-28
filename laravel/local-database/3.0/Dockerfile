@@ -168,6 +168,13 @@ RUN set -ex; \
 VOLUME /var/lib/mysql
 
 COPY entrypoint.sh /usr/local/bin/
+#my mysql config
+RUN mkdir -p /etc/mysql/conf.d/
+RUN echo "[mysqld]" >> /etc/mysql/conf.d/my.cnf && \
+    echo "user=root" >> /etc/mysql/conf.d/my.cnf && \
+    echo "[mysqld_safe]" >> /etc/mysql/conf.d/my.cnf && \
+    echo "log-error=/var/log/mysql/mysqld.log" >> /etc/mysql/conf.d/my.cnf
+
 ENTRYPOINT ["entrypoint.sh"]
 
 CMD ["mysqld"]
