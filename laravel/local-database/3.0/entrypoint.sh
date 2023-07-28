@@ -466,7 +466,7 @@ _laravel_config() {
 		# verify if migrations exist only accept - char in database names 
 		#more info https://dev.mysql.com/doc/refman/5.7/en/identifier-mapping.html
 		echo "[Laravel] verificado migrations en $MARIADB_DATABASE"
-		if [ ! -f "$DATADIR/${MARIADB_DATABASE//"-"/"@002d"}/migrations.frm" ]; then
+		if grep -q "^DB_HOST=127.0.0.1$" /app/.env && [ ! -f "$DATADIR/${MARIADB_DATABASE//"-"/"@002d"}/migrations.frm" ]; then
 			# Laravel Migrations
 			echo "[Laravel] Ejecuntando migrate"
 			php /app/artisan migrate --force
