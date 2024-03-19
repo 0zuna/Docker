@@ -16,16 +16,6 @@ change permission on storage laravel
 ```sh
 $ chmod -R 777 storage bootstrap/cache entrypoint.sh
 ```
-### Edit you .env database
-```sh
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=app-api
-DB_USERNAME=root
-DB_PASSWORD=
-```
-
 ### RUN
 ```sh
 $ docker-compose up
