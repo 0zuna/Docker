@@ -473,14 +473,16 @@ _laravel_config() {
 			# Laravel Sedding
 			echo "[Laravel] Ejecuntando Seeding"
 			php /app/artisan db:seed
-			# Laravel Passport
-			echo "[Laravel] Ejecuntando passport install"
-			php /app/artisan passport:install --force
-
-			else
+		else
 			echo "[Laravel] Migration exists"
 			echo "[Laravel] Skip"
 
+		fi
+
+		if [ ! -f "./storage/oauth-private.key" ] || [ ! -f "./storage/oauth-public.key"]; then
+			# Laravel Passport
+			echo "[Laravel] Ejecuntando passport install"
+			php /app/artisan passport:install --force
 		fi
 }
 
