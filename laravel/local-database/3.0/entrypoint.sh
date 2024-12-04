@@ -120,7 +120,7 @@ mysql_get_config() {
 
 # Do a temporary startup of the MariaDB server, for init purposes
 docker_temp_server_start() {
-	"$@" --skip-networking --default-time-zone=SYSTEM --socket="${SOCKET}" --wsrep_on=OFF --skip-log-bin \
+	"$@" --user=root --skip-networking --default-time-zone=SYSTEM --socket="${SOCKET}" --wsrep_on=OFF --skip-log-bin \
 		--loose-innodb_buffer_pool_load_at_startup=0 &
 	mysql_note "Waiting for server startup"
 	# only use the root password if the database has already been initializaed
@@ -466,21 +466,23 @@ _laravel_config() {
 		# verify if migrations exist only accept - char in database names 
 		#more info https://dev.mysql.com/doc/refman/5.7/en/identifier-mapping.html
 		echo "[Laravel] verificado migrations en $MARIADB_DATABASE"
-		if [ ! -f "$DATADIR/${MARIADB_DATABASE//"-"/"@002d"}/migrations.frm" ]; then
+		if grep -q "^DB_HOST=127.0.0.1$" /app/.env && [ ! -f "$DATADIR/${MARIADB_DATABASE//"-"/"@002d"}/migrations.frm" ]; then
 			# Laravel Migrations
 			echo "[Laravel] Ejecuntando migrate"
 			php /app/artisan migrate --force
 			# Laravel Sedding
 			echo "[Laravel] Ejecuntando Seeding"
 			php /app/artisan db:seed
-			# Laravel Passport
-			echo "[Laravel] Ejecuntando passport install"
-			php /app/artisan passport:install --force
-
-			else
+		else
 			echo "[Laravel] Migration exists"
 			echo "[Laravel] Skip"
 
+		fi
+
+		if [ ! -f "./storage/oauth-private.key" ] || [ ! -f "./storage/oauth-public.key"]; then
+			# Laravel Passport
+			echo "[Laravel] Ejecuntando passport install"
+			php /app/artisan passport:install --force
 		fi
 }
 

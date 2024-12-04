@@ -18,7 +18,7 @@ services:
       # - LETSENCRYPT_HOST=host.example.com
       # - VIRTUAL_PORT=80
       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
-      - MARIADB_DATABASE=app-api
+      - MARIADB_DATABASE=laravel
     networks:
       network1:
         ipv4_address: 172.1.0.10
